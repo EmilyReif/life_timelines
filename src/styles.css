@@ -58,6 +58,17 @@ button {
   color: var(--mustard);
 }
 
+.info-link {
+  display: inline-flex;
+  vertical-align: -1px;
+  margin-right: 8px;
+  color: var(--ink-soft);
+}
+
+.info-link:hover {
+  color: var(--ink);
+}
+
 /* ---------- legend ---------- */
 
 .legend {

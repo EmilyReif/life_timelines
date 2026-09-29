@@ -21,6 +21,19 @@ export default function App() {
     <div className="app">
       <header className="topbar">
         <h1>
+          <a
+            className="info-link"
+            href="https://github.com/EmilyReif/life_timelines#readme"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="about this project (readme on github)"
+          >
+            <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+              <circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" strokeWidth="1.4" />
+              <circle cx="8" cy="4.8" r="1" fill="currentColor" />
+              <line x1="8" y1="7.2" x2="8" y2="11.6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+            </svg>
+          </a>
           <span className="accent">life</span> timelines
         </h1>
       </header>
