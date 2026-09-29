@@ -1,0 +1,250 @@
+/* Palette sampled from the "phenomenology and the norms of perception" cover.
+   Event colors live in model.ts (TYPE_META); keep --bg in sync with PAGE_BG there. */
+:root {
+  --bg: #ece6dc; /* warm cream */
+  --bg-raised: #f4f0e9; /* boxes that float over the chart */
+  --ink: #2b2b2b; /* near-black text */
+  --ink-soft: #8d877d; /* secondary text: years, axis */
+  --rule: #d9d1c4; /* hairlines */
+  --mustard: #c9a227;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  /* Geometric sans like the cover. Montserrat if installed; otherwise the
+     built-in macOS/Windows geometric fonts. No web font is fetched. */
+  font-family: "Montserrat", "Avenir Next", "Avenir", "Century Gothic", "Futura", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  text-transform: lowercase;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  text-transform: inherit;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* ---------- top bar ---------- */
+
+.topbar {
+  padding: 14px 16px 2px;
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.topbar .accent {
+  color: var(--mustard);
+}
+
+/* ---------- legend ---------- */
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px 12px 10px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  padding: 3px 9px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.legend-item:hover {
+  border-color: var(--rule);
+}
+
+.legend-item.active {
+  border-color: #c4baa9;
+  background: var(--bg-raised);
+}
+
+.legend-item.off {
+  opacity: 0.35;
+}
+
+/* ---------- chart ---------- */
+
+.chart-scroll {
+  flex: 1;
+  overflow: auto;
+  position: relative;
+  outline: none;
+}
+
+.chart-inner {
+  position: relative;
+  min-width: 100%;
+}
+
+.col-header {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  background: rgba(236, 230, 220, 0.96);
+  border-bottom: 1px solid var(--rule);
+}
+
+.col-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+  overflow: hidden;
+}
+
+/* First name light, surname bold, like "maxime doyon" on the cover. */
+.col-name {
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  line-height: 1.25;
+}
+
+.col-name.first {
+  font-weight: 400;
+}
+
+.col-name.last {
+  font-weight: 700;
+}
+
+.col-years {
+  font-size: 10px;
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
+}
+
+.chart-body {
+  position: relative;
+  cursor: default;
+  touch-action: none;
+  user-select: none;
+}
+
+.chart-svg {
+  display: block;
+}
+
+.axis-label {
+  font-size: 10.5px;
+  fill: var(--ink-soft);
+  text-anchor: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.band {
+  fill: rgba(43, 43, 43, 0.06);
+}
+
+.cursor-tag rect {
+  fill: var(--ink);
+}
+
+.cursor-tag text {
+  fill: var(--bg);
+  font-size: 12px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.lifeline {
+  stroke-width: 1;
+  stroke-linecap: round;
+}
+
+.marker {
+  cursor: pointer;
+  transition: r 120ms ease;
+}
+
+/* inline labels for the age band */
+
+.band-labels {
+  position: absolute;
+  z-index: 3;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 5px;
+  background: var(--bg-raised);
+  box-shadow: 0 1px 4px rgba(60, 45, 20, 0.12);
+  cursor: default;
+}
+
+.band-label {
+  display: block;
+  text-align: left;
+  font-size: 10.5px;
+  line-height: 1.2;
+  padding: 1px 2px;
+  border: none;
+  background: none;
+  color: var(--ink);
+  cursor: pointer;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.band-label:hover {
+  background: var(--bg);
+  border-radius: 3px;
+}
+
+/* ---------- click tip ---------- */
+
+.tip {
+  position: absolute;
+  z-index: 10;
+  transform: translateY(-50%);
+  max-width: 220px;
+  width: max-content;
+  padding: 3px 6px;
+  font-size: 11px;
+  line-height: 1.3;
+  color: var(--ink);
+  background: var(--bg-raised);
+  border-radius: 5px;
+  box-shadow: 0 1px 4px rgba(60, 45, 20, 0.18);
+  pointer-events: none;
+}
