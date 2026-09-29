@@ -21,6 +21,10 @@ Then open http://127.0.0.1:5173/.
 | `npm run build` | Type-check and build to `dist/` |
 | `npm run preview` | Serve the production build at http://127.0.0.1:4173/ |
 
+## Deploying
+
+Live at **https://emilyreif.com/life_timelines/**. Every push to `main` builds and publishes to GitHub Pages via [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
+
 ## Using it
 
 - **Move the age band:** hover over the chart (on touch, drag), or use ↑/↓ (Shift = 5 years). Events in the band get enlarged and labeled.
