@@ -73,4 +73,14 @@ Marriages carry an `endDate` (divorce, the spouse's death, or the person's own d
 
 ## Data caveat
 
-The current dataset was written by hand for prototyping and has **not been verified**, so some dates may be off. It's meant to be replaced by a Wikidata-based ingestion pipeline (next milestone).
+The current dataset was written by hand for prototyping and has **not been verified**, so some dates may be off. It's meant to be replaced by the pipeline below.
+
+## Next steps: real data (offline hybrid)
+
+A build-time script that writes static JSON; the site itself never calls an API.
+
+1. **Pick people** by popularity from [Pantheon](https://pantheon.world) or Wikidata.
+2. **Skeleton from Wikidata:** birth/death/cause, spouses with start/end dates, children's births, positions, awards.
+3. **LLM pass over the Wikipedia article** to add career and "other" events, each with a quoted source sentence and article revision ID.
+4. **Merge:** prefer Wikidata's date when sources disagree, and flag conflicts.
+5. **UI:** add search/filters to pick which people to show, since only ~20–30 columns fit on screen.
