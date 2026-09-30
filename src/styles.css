@@ -60,8 +60,8 @@ button {
 
 .info-link {
   display: inline-flex;
-  vertical-align: -1px;
-  margin-right: 8px;
+  vertical-align: 6px;
+  margin-left: 6px;
   color: var(--ink-soft);
 }
 
