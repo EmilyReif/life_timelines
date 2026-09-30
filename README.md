@@ -1,6 +1,6 @@
 # Life Timelines
 
-Compare famous people's lives on an **age-aligned timeline**. Everyone's birth is lined up at age 0, so you can see what different people were doing at the same age
+What were famous people up to at a given age? Everyone's birth is lined up at age 0.
 
 Each person is a vertical column that runs from birth (top) down to death. Events are colored markers by type: personal life sits to the left of the line (children and other on the outside, relationships next to the line; outer dots slide in when nothing is between them and the line), and professional life (education, career) to the right. Move the horizontal age band up and down to compare everyone at a given age.
 
@@ -71,12 +71,11 @@ To add a person, add an entry to `src/data/people.ts`. Age is computed as `event
 
 Marriages carry an `endDate` (divorce, the spouse's death, or the person's own death), which draws the relationship bar. A divorce is also its own hollow `divorce` event. This maps directly onto Wikidata's spouse (P26) start/end time qualifiers.
 
-## Data caveat
+## Data
 
-The current dataset was written by hand for prototyping and has **not been verified**, so some dates may be off. It's meant to be replaced by the pipeline below.
+The current dataset was written by hand for prototyping and has **not been verified**, so some dates may be off. TODO: replace by the pipeline below.
 
-## Next steps: real data (offline hybrid)
-
+### Pipeline
 A build-time script that writes static JSON; the site itself never calls an API.
 
 1. **Pick people** by popularity from [Pantheon](https://pantheon.world) or Wikidata.
