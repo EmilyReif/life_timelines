@@ -69,6 +69,17 @@ button {
   color: var(--ink);
 }
 
+/* ---------- gender filter ---------- */
+
+.gender-filter {
+  padding: 4px 12px 5px;
+}
+
+.gender-filter-label {
+  color: var(--ink-soft);
+  font-size: 11px;
+}
+
 /* ---------- legend ---------- */
 
 .legend {
@@ -125,9 +136,39 @@ button {
   position: sticky;
   top: 0;
   z-index: 5;
-  display: flex;
+  display: block;
   background: rgba(236, 230, 220, 0.96);
   border-bottom: 1px solid var(--rule);
+}
+
+.gender-groups,
+.col-headers {
+  display: flex;
+}
+
+.gender-groups {
+  align-items: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+.gender-group-label {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  height: 100%;
+  padding-left: 8px;
+  color: var(--ink-soft);
+  font-size: 10px;
+}
+
+.gender-group-label + .gender-group-label {
+  border-left: 1px solid #c4baa9;
+}
+
+.gender-group-label span {
+  color: var(--ink-soft);
+  font-variant-numeric: tabular-nums;
 }
 
 .col-head {
@@ -200,6 +241,13 @@ button {
 .lifeline {
   stroke-width: 1;
   stroke-linecap: round;
+}
+
+.gender-divider {
+  stroke: #c4baa9;
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  pointer-events: none;
 }
 
 .marker {

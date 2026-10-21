@@ -29,6 +29,7 @@ Live at **https://emilyreif.com/life_timelines/**. Every push to `main` builds a
 
 - **Move the age band:** hover over the chart (on touch, drag), or use ↑/↓ (Shift = 5 years). Events in the band get enlarged and labeled.
 - **Event details:** click a marker (or its label in the band) to outline it and show its title and age; Esc or clicking the chart clears it.
+- **Filter people:** use the people control to show everyone, women, or men.
 - **Focus on one event type:** click an item in the legend to show only that type. Click it again to show everything.
 
 ## Project layout
@@ -48,6 +49,7 @@ The chart depends only on the `Person[]` shape in `model.ts`:
 type Person = {
   id: string;
   name: string;
+  gender: "woman" | "man";
   firstName: string;
   shortName: string;      // usually the surname
   birthDate: string;      // "YYYY", "YYYY-MM" or "YYYY-MM-DD"

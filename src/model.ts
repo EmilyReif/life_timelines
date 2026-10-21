@@ -44,9 +44,12 @@ export type LifeEvent = {
   description?: string; // not shown in the UI yet
 };
 
+export type Gender = "woman" | "man";
+
 export type Person = {
   id: string;
   name: string;
+  gender: Gender;
   firstName: string;
   shortName: string; // usually the surname
   birthDate: string;

@@ -17,6 +17,11 @@ export default function App() {
     );
   }, [focus]);
 
+  const people = [...PEOPLE].sort((a, b) => {
+    if (a.gender !== b.gender) return a.gender === "woman" ? -1 : 1;
+    return a.birthDate.localeCompare(b.birthDate);
+  });
+
   return (
     <div className="app">
       <header className="topbar">
@@ -37,8 +42,11 @@ export default function App() {
           </a>
         </h1>
       </header>
+      <div className="gender-filter">
+        <span className="gender-filter-label">by gender</span>
+      </div>
       <Legend focus={focus} onSelect={(id) => setFocus((cur) => (cur === id ? null : id))} />
-      <Timeline people={PEOPLE} hidden={hidden} cursorAge={cursorAge} onCursorChange={setCursorAge} />
+      <Timeline people={people} hidden={hidden} cursorAge={cursorAge} onCursorChange={setCursorAge} />
     </div>
   );
 }

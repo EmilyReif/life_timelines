@@ -20,7 +20,8 @@ import {
 } from "./model";
 
 const AXIS_W = 48; // left gutter for age labels
-const HEADER_H = 54; // sticky name row
+const GROUP_HEADER_H = 18;
+const HEADER_H = 72; // sticky gender and name rows
 const TOP_PAD = 8;
 const BOTTOM_PAD = 20;
 const MIN_COL_W = 58;
@@ -135,6 +136,8 @@ export function Timeline({ people, hidden, cursorAge, onCursorChange }: Props) {
   }, []);
 
   const spans = useMemo(() => people.map(lifespan), [people]);
+  const womenCount = people.filter((person) => person.gender === "woman").length;
+  const menCount = people.length - womenCount;
   const maxAge = Math.ceil(Math.max(40, ...spans) / 5) * 5;
   const colW = Math.max(MIN_COL_W, (size.w - AXIS_W) / Math.max(1, people.length));
   const pxPerYear = Math.max(MIN_PX_PER_YEAR, (size.h - HEADER_H - TOP_PAD - BOTTOM_PAD) / maxAge);
@@ -213,16 +216,30 @@ export function Timeline({ people, hidden, cursorAge, onCursorChange }: Props) {
     <div className="chart-scroll" ref={scrollRef} tabIndex={0} onKeyDown={onKeyDown}>
       <div className="chart-inner" style={{ width }}>
         {/* Sticky name header */}
-        <div className="col-header" style={{ height: HEADER_H, paddingLeft: AXIS_W }}>
-          {columns.map(({ person }) => (
-            <div key={person.id} className="col-head" style={{ width: colW }} title={person.name}>
-              <div className="col-name first">{person.firstName}</div>
-              <div className="col-name last">{person.shortName}</div>
-              <div className="col-years">
-                {yearOf(person.birthDate)}–{person.deathDate ? yearOf(person.deathDate) : ""}
+        <div className="col-header" style={{ height: HEADER_H }}>
+          <div className="gender-groups" style={{ height: GROUP_HEADER_H, paddingLeft: AXIS_W }}>
+            {womenCount > 0 && (
+              <div className="gender-group-label" style={{ width: colW * womenCount }}>
+                women <span>{womenCount}</span>
               </div>
-            </div>
-          ))}
+            )}
+            {menCount > 0 && (
+              <div className="gender-group-label" style={{ width: colW * menCount }}>
+                men <span>{menCount}</span>
+              </div>
+            )}
+          </div>
+          <div className="col-headers" style={{ height: HEADER_H - GROUP_HEADER_H, paddingLeft: AXIS_W }}>
+            {columns.map(({ person }) => (
+              <div key={person.id} className="col-head" style={{ width: colW }} title={person.name}>
+                <div className="col-name first">{person.firstName}</div>
+                <div className="col-name last">{person.shortName}</div>
+                <div className="col-years">
+                  {yearOf(person.birthDate)}–{person.deathDate ? yearOf(person.deathDate) : ""}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Chart body: pointer anywhere moves the age cursor */}
@@ -242,6 +259,16 @@ export function Timeline({ people, hidden, cursorAge, onCursorChange }: Props) {
                 {a}
               </text>
             ))}
+
+            {womenCount > 0 && menCount > 0 && (
+              <line
+                x1={AXIS_W + womenCount * colW}
+                x2={AXIS_W + womenCount * colW}
+                y1={0}
+                y2={bodyH}
+                className="gender-divider"
+              />
+            )}
 
             {/* age cursor band */}
             <rect x={AXIS_W} y={bandTop} width={width - AXIS_W} height={bandBottom - bandTop} className="band" />
